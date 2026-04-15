@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api/entries';
+const API_URL = 'https://app-pet-back.onrender.com/api/entries';
 
 const form = document.getElementById('entry-form');
 const entryId = document.getElementById('entry-id');
