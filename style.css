@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   background: #0f172a;
   color: #fff;
 }
@@ -13,6 +13,10 @@ body {
   max-width: 700px;
   margin: auto;
   padding: 20px;
+}
+
+h1 {
+  text-align: center;
 }
 
 .card {
@@ -29,6 +33,7 @@ form {
 }
 
 input, textarea, select {
+  width: 100%;
   padding: 10px;
   border-radius: 6px;
   border: none;
@@ -36,10 +41,10 @@ input, textarea, select {
 
 button {
   background: #22c55e;
-  border: none;
-  padding: 10px;
-  border-radius: 6px;
   color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
 }
 
@@ -54,26 +59,19 @@ button {
 .task-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .status {
   display: inline;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 600;
+  line-height: 1;
 }
 
-.status.pendente {
-  background: #facc15;
-  color: #000;
-  padding: 1px 4px;
-  border-radius: 4px;
-}
-
+.status.pendente,
 .status.concluido {
-  background: #22c55e;
   padding: 1px 4px;
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 .task-actions {
@@ -86,7 +84,3 @@ button {
   flex: 1;
   background: #334155;
 }
-
-.priority.baixa { color: #22c55e; }
-.priority.media { color: #facc15; }
-.priority.alta { color: #ef4444; }
