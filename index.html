@@ -1,32 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Task Manager</title>
+  <meta charset="UTF-8">
+  <title>Gerenciador de Tarefas</title>
+  <link rel="stylesheet" href="style.css">
 
-  <link rel="stylesheet" href="style.css" />
+
+  <script src="app.js" defer></script>
 </head>
 
 <body>
   <div class="container">
-    <h1>Task Manager</h1>
+    <h1>Gerenciador de Tarefas</h1>
 
-    <form id="task-form">
-      <input id="title" placeholder="Título" required />
-      <textarea id="description" placeholder="Descrição"></textarea>
+    <div class="card">
+      <form id="task-form">
 
-      <select id="status">
-        <option value="pendente">Pendente</option>
-        <option value="concluido">Concluído</option>
-      </select>
+        <input id="title" placeholder="Título" required>
 
-      <button>Salvar</button>
-    </form>
+        <textarea id="description" placeholder="Descrição"></textarea>
 
-    <div id="list"></div>
+        <select id="status">
+          <option value="pendente">Pendente</option>
+          <option value="concluido">Concluído</option>
+        </select>
+
+        <select id="priority">
+          <option value="baixa">Baixa</option>
+          <option value="media" selected>Média</option>
+          <option value="alta">Alta</option>
+        </select>
+
+        <input type="datetime-local" id="dueDate">
+
+        <button type="submit">Salvar</button>
+
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Tarefas</h2>
+      <div id="list"></div>
+    </div>
   </div>
-
-  <script src="app.js"></script>
 </body>
 </html>
