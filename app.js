@@ -12,30 +12,49 @@ document.addEventListener("DOMContentLoaded", () => {
   const priority = document.getElementById("priority");
   const dueDate = document.getElementById("dueDate");
 
+  function capitalizar(texto) {
+    if (!texto) return "";
+    return texto.charAt(0).toUpperCase() + texto.slice(1).toLowerCase();
+  }
+
+  function formatarData(data) {
+    if (!data) return "Sem data definida";
+
+    return new Date(data).toLocaleString("pt-BR", {
+      dateStyle: "short",
+      timeStyle: "short"
+    });
+  }
+
   async function load() {
     const res = await fetch(API);
     const data = await res.json();
-    const safe = Array.isArray(data) ? data : [];
 
-    list.innerHTML = safe.map(t => `
-      <div>
+    const tarefas = Array.isArray(data) ? data : [];
+
+    list.innerHTML = tarefas.map(t => `
+      <div class="task-card ${t.priority}">
         <h3>${t.title}</h3>
-        <p>${t.description || ''}</p>
-        <p>${t.status}</p>
-        <p>${t.priority}</p>
 
-        <button onclick="editTask('${t._id}')">Editar</button>
-        <button onclick="deleteTask('${t._id}')">Excluir</button>
+        <p><strong>Descrição:</strong> ${t.description || "Sem descrição"}</p>
+        <p><strong>Status:</strong> ${capitalizar(t.status)}</p>
+        <p><strong>Prioridade:</strong> ${capitalizar(t.priority)}</p>
+        <p><strong>Prazo:</strong> ${formatarData(t.dueDate)}</p>
+
+        <div class="acoes">
+          <button onclick="editTask('${t._id}')">Editar</button>
+          <button onclick="deleteTask('${t._id}')">Excluir</button>
+        </div>
       </div>
-    `).join('');
+    `).join("");
   }
 
   form.onsubmit = async (e) => {
     e.preventDefault();
 
-    const data = {
-      title: title.value,
-      description: description.value,
+    const tarefa = {
+      title: title.value.trim(),
+      description: description.value.trim(),
       status: status.value,
       priority: priority.value,
       dueDate: dueDate.value || null
@@ -46,8 +65,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     await fetch(url, {
       method,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(tarefa)
     });
 
     editId = null;
@@ -65,10 +86,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     editId = id;
 
-    title.value = t.title;
-    description.value = t.description;
-    status.value = t.status;
-    priority.value = t.priority;
+    title.value = t.title || "";
+    description.value = t.description || "";
+    status.value = t.status || "pendente";
+    priority.value = t.priority || "media";
 
     dueDate.value = t.dueDate
       ? new Date(t.dueDate).toISOString().slice(0, 16)
@@ -76,7 +97,10 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   window.deleteTask = async (id) => {
-    await fetch(`${API}/${id}`, { method: "DELETE" });
+    await fetch(`${API}/${id}`, {
+      method: "DELETE"
+    });
+
     load();
   };
 

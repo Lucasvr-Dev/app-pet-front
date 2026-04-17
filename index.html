@@ -1,24 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Gerenciador de Tarefas</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>Gerenciador de Tarefas</title>
+  <link rel="icon" type="image/png" href="icons/favicon.ico">
+
+  <meta
+    name="description"
+    content="Aplicativo para organizar tarefas diárias de forma simples e moderna."
+  />
+
+  <meta name="theme-color" content="#22c55e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
 
   <script src="app.js" defer></script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js")
+          .then(() => console.log("PWA ativo"))
+          .catch((error) => console.log("Erro SW:", error));
+      });
+    }
+  </script>
 </head>
 
 <body>
   <div class="container">
+
     <h1>Gerenciador de Tarefas</h1>
 
     <div class="card">
       <form id="task-form">
 
-        <input id="title" placeholder="Título" required>
+        <input
+          id="title"
+          placeholder="Título da tarefa"
+          required
+        />
 
-        <textarea id="description" placeholder="Descrição"></textarea>
+        <textarea
+          id="description"
+          placeholder="Descrição da tarefa"
+        ></textarea>
 
         <select id="status">
           <option value="pendente">Pendente</option>
@@ -31,17 +62,20 @@
           <option value="alta">Alta</option>
         </select>
 
-        <input type="datetime-local" id="dueDate">
+        <input type="datetime-local" id="dueDate" />
 
-        <button type="submit">Salvar</button>
+        <button type="submit">
+          Salvar Tarefa
+        </button>
 
       </form>
     </div>
 
     <div class="card">
-      <h2>Tarefas</h2>
+      <h2>Minhas Tarefas</h2>
       <div id="list"></div>
     </div>
+
   </div>
 </body>
 </html>

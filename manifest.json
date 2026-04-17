@@ -1,12 +1,10 @@
 {
-  "name": "Diário Pet",
-  "short_name": "PetDiary",
+  "name": "Gerenciador de Tarefas",
+  "short_name": "Tasks",
   "start_url": ".",
-  "scope": ".",
   "display": "standalone",
-  "background_color": "#f5f7fb",
-  "theme_color": "#4f46e5",
-  "description": "Aplicativo para registrar acontecimentos do seu pet.",
+  "background_color": "#0f172a",
+  "theme_color": "#22c55e",
   "icons": [
     {
       "src": "icons/icon-192.png",
